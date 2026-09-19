@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="QVEX is Queen's University's VEX U robotics team. Two robots, one 12-foot field, and a shot at the VEX Robotics World Championship. No experience necessary.">
+<meta name="theme-color" content="#0F0A16">
+
+<!-- Open Graph / link previews -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="QVEX — Queen's VEX U Robotics Team">
+<meta property="og:description" content="Two robots, one 12-foot field, and a shot at Worlds. Queen's University's VEX U robotics team.">
+<meta property="og:site_name" content="QVEX">
+<!-- TODO: add an absolute URL to a 1200x630 preview image once hosted -->
+<!-- <meta property="og:image" content="https://qvex.ca/og.png"> -->
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%239D4EDD'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23fff' text-anchor='middle'%3EQ%3C/text%3E%3C/svg%3E">
+
+<style>
+  /* baseline reset (the hosting platform used to supply this) */
+  :root{color-scheme:dark}
+  html,body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+<title>QVEX Robotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --ink:#0F0A16;
+    --surface:#1A1226;
+    --surface-2:#241832;
+    --line:#382A4A;
+    --line-soft:#2B1F3C;
+    --violet:#9D4EDD;
+    --violet-bright:#C77DFF;
+    --plum:#5A189A;
+    --lilac:#E0C3FC;
+    --text:#EFE8F6;
+    --muted:#A996BC;
+    --gold:#F2C14E;
+    --red:#E05263;
+    --blue:#4C7DF0;
+
+    --display:"Chakra Petch","Segoe UI Semibold",system-ui,sans-serif;
+    --body:"IBM Plex Sans","Segoe UI",Helvetica,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+
+    --gutter:clamp(18px,5vw,64px);
+    --max:1180px;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ambient purple wash, painted not gradient-hero'd */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      radial-gradient(900px 500px at 12% -10%, rgba(157,78,221,.20), transparent 70%),
+      radial-gradient(700px 480px at 92% 8%, rgba(90,24,154,.28), transparent 70%);
+  }
+
+  .wrap{position:relative;z-index:1;max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+
+  a{color:var(--violet-bright);text-decoration:none}
+  a:hover{color:var(--lilac)}
+  :focus-visible{outline:2px solid var(--violet-bright);outline-offset:3px;border-radius:3px}
+
+  h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+  h2{font-size:clamp(26px,3.6vw,40px);line-height:1.12;font-weight:700}
+  h3{font-size:19px;font-weight:600;letter-spacing:0}
+  p{margin:0}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--violet-bright);
+  }
+  .muted{color:var(--muted)}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:50;
+    background:rgba(15,10,22,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-in{
+    display:flex;align-items:center;gap:20px;
+    max-width:var(--max);margin:0 auto;
+    padding:12px var(--gutter);
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:18px;color:var(--text);letter-spacing:.02em}
+  .brand .mark{
+    width:26px;height:26px;flex:none;border-radius:6px;
+    background:linear-gradient(145deg,var(--violet-bright),var(--plum));
+    display:grid;place-items:center;
+    font-family:var(--mono);font-size:12px;font-weight:500;color:#fff;
+  }
+  .nav-links{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+  .nav-links a{font-size:14px;color:var(--muted);font-weight:500}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--display);font-weight:600;font-size:15px;
+    padding:10px 18px;border-radius:8px;border:1px solid transparent;
+    background:var(--violet);color:#fff;
+    transition:background .15s ease,transform .15s ease;
+  }
+  .btn:hover{background:var(--violet-bright);color:#1A1226;transform:translateY(-1px)}
+  .btn.ghost{background:transparent;border-color:var(--line);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--violet-bright);background:rgba(157,78,221,.12);color:var(--text);transform:translateY(-1px)}
+  .btn.sm{font-size:14px;padding:8px 14px}
+  @media(max-width:760px){.nav-links{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:clamp(48px,7vw,84px) clamp(36px,5vw,56px)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,56px);align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+  .hero h1{
+    font-size:clamp(34px,5.6vw,62px);
+    line-height:1.04;
+    font-weight:700;
+    margin:14px 0 18px;
+  }
+  .hero h1 em{font-style:normal;color:var(--violet-bright)}
+  .hero p.lede{font-size:clamp(16px,1.5vw,18.5px);color:var(--muted);max-width:56ch}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+  .specs{
+    display:flex;flex-wrap:wrap;gap:10px 28px;
+    margin-top:30px;padding-top:22px;border-top:1px solid var(--line-soft);
+    font-family:var(--mono);font-size:12.5px;color:var(--muted);
+  }
+  .specs b{display:block;font-family:var(--display);font-size:22px;font-weight:700;color:var(--text);line-height:1.2;font-variant-numeric:tabular-nums}
+
+  /* field diagram */
+  .field-card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:linear-gradient(170deg,var(--surface-2),var(--surface));
+    padding:18px;
+  }
+  .field-card svg{display:block;width:100%;height:auto;max-width:100%}
+  .field-cap{
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--muted);
+    letter-spacing:.05em;text-transform:uppercase;
+  }
+  .dash{stroke-dasharray:5 5;animation:crawl 3.2s linear infinite}
+  @keyframes crawl{to{stroke-dashoffset:-40}}
+  @media(prefers-reduced-motion:reduce){.dash{animation:none}}
+
+  /* ---------- sections ---------- */
+  section{padding-block:clamp(44px,6vw,76px);position:relative;z-index:1}
+  .sec-head{max-width:62ch;margin-bottom:clamp(24px,3vw,38px)}
+  .sec-head h2{margin:10px 0 12px}
+  .sec-head p{color:var(--muted)}
+
+  .rule{border:0;border-top:1px solid var(--line-soft);margin:0}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,52px);align-items:start}
+  @media(max-width:860px){.about-grid{grid-template-columns:1fr}}
+  .about-body p+p{margin-top:16px}
+  .about-body{color:var(--muted);font-size:16.5px}
+  .about-body strong{color:var(--text);font-weight:600}
+
+  .facts{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+  .fact{display:flex;justify-content:space-between;gap:16px;padding:13px 16px;border-bottom:1px solid var(--line-soft);font-size:14.5px}
+  .fact:last-child{border-bottom:0}
+  .fact dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0}
+  .fact dd{margin:0;text-align:right;font-weight:500}
+
+  /* subteams */
+  .teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .team{background:var(--surface);padding:22px 20px;display:flex;flex-direction:column;gap:9px}
+  .team .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--violet-bright)}
+  .team p{font-size:14.5px;color:var(--muted)}
+  .team ul{margin:4px 0 0;padding-left:18px;font-size:13.5px;color:var(--muted)}
+  .team li{margin-bottom:3px}
+
+  /* season */
+  .season{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,34px)}
+  @media(max-width:860px){.season{grid-template-columns:1fr}}
+  .panel{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:24px}
+  .panel h3{margin-bottom:10px}
+  .panel p{color:var(--muted);font-size:15px}
+  .rules{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .rules li{display:flex;gap:12px;font-size:14.5px;color:var(--muted);align-items:baseline}
+  .rules span{font-family:var(--mono);font-size:11.5px;color:var(--violet-bright);letter-spacing:.06em;min-width:74px;flex:none}
+
+  /* timeline */
+  .timeline{position:relative;margin:0;padding:0 0 0 26px;list-style:none;border-left:1px solid var(--line)}
+  .tl{position:relative;padding:0 0 30px 6px}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{
+    content:"";position:absolute;left:-32px;top:8px;width:9px;height:9px;border-radius:50%;
+    background:var(--violet);border:2px solid var(--ink);box-shadow:0 0 0 3px rgba(157,78,221,.18);
+  }
+  .tl.award::before{background:var(--gold);box-shadow:0 0 0 3px rgba(242,193,78,.16)}
+  .tl .year{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .tl h3{margin:4px 0 6px;font-size:17px}
+  .tl p{font-size:14.5px;color:var(--muted)}
+  .medal{color:var(--gold);font-weight:600}
+
+  /* join */
+  .join-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,34px);align-items:start}
+  @media(max-width:860px){.join-grid{grid-template-columns:1fr}}
+  .open-roles{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+  .role{
+    display:flex;align-items:center;gap:14px;justify-content:space-between;
+    border:1px solid var(--line);border-radius:10px;background:var(--surface-2);
+    padding:15px 16px;flex-wrap:wrap;
+  }
+  .role div{min-width:0}
+  .role strong{display:block;font-family:var(--display);font-size:16px;font-weight:600}
+  .role small{color:var(--muted);font-size:13px}
+  .quote{
+    border-left:3px solid var(--violet);
+    padding:4px 0 4px 18px;margin:22px 0 0;
+    font-family:var(--display);font-size:clamp(19px,2.3vw,25px);line-height:1.3;font-weight:600;
+  }
+  .quote cite{display:block;font-family:var(--mono);font-size:11.5px;font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+
+  /* sponsors */
+  .sponsors{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+  .sponsor{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:18px 18px 16px}
+  .sponsor strong{display:block;font-family:var(--display);font-size:16px;font-weight:600;margin-bottom:5px}
+  .sponsor small{color:var(--muted);font-size:13px;line-height:1.5;display:block}
+  .sponsor-note{
+    margin-top:22px;border:1px solid var(--line);border-radius:12px;
+    background:linear-gradient(160deg,rgba(157,78,221,.16),rgba(90,24,154,.06));
+    padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  }
+  .sponsor-note p{color:var(--muted);max-width:58ch;font-size:15px}
+
+  /* contact */
+  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .chan{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:17px 18px;display:block}
+  .chan .tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .chan strong{display:block;font-family:var(--display);font-size:16.5px;font-weight:600;color:var(--text);margin-top:5px}
+  .chan:hover{border-color:var(--violet-bright);background:var(--surface-2)}
+  .chan:hover strong{color:var(--violet-bright)}
+
+  /* placeholder chips for the team to fill in */
+  .tbd{
+    display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;
+    color:var(--violet-bright);border:1px dashed var(--violet);border-radius:6px;
+    padding:5px 10px;background:rgba(157,78,221,.08);
+  }
+  .tbd-block{display:block;margin-top:14px}
+
+  footer{border-top:1px solid var(--line-soft);padding-block:26px 34px;position:relative;z-index:1}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .foot-links{display:flex;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="mark">QV</span> QVEX</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#subteams">Sub-teams</a>
+      <a href="#season">Season</a>
+      <a href="#results">Results</a>
+      <a href="#sponsors">Sponsors</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn sm" href="https://breezy.engsoc.queensu.ca/p/e928d89c4ac6-queen-s-vex-u-robotics-team-qvex-general-member" target="_blank" rel="noopener">Apply</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Queen's University · Kingston, ON · VEX U</p>
+        <h1>Two robots, one 12-foot field, and a <em>shot at Worlds</em>.</h1>
+        <p class="lede">QVEX is Queen's VEX U robotics team. Every year we design, machine, wire and program a pair of competition robots from a blank CAD file — then take them to the largest robotics competition on the planet.</p>
+        <div class="hero-cta">
+          <a class="btn" href="https://breezy.engsoc.queensu.ca/p/e928d89c4ac6-queen-s-vex-u-robotics-team-qvex-general-member" target="_blank" rel="noopener">Join the team</a>
+          <a class="btn ghost" href="https://linktr.ee/qvex" target="_blank" rel="noopener">See the robot reveal</a>
+        </div>
+        <div class="specs">
+          <div><b>2019</b>founded</div>
+          <div><b>Top 16</b>at Worlds</div>
+          <div><b>3</b>faculties</div>
+          <div><b>300+</b>in our Discord</div>
+        </div>
+      </div>
+
+      <div class="field-card">
+        <!-- Push Back field, top-down. 12ft x 12ft, 6x6 foam tiles. -->
+        <svg viewBox="0 0 320 320" role="img" aria-label="Top-down diagram of a 12-by-12-foot VEX Push Back field showing tiles, long goals, centre goals and an autonomous path.">
+          <rect x="4" y="4" width="312" height="312" rx="10" fill="#150E20" stroke="#382A4A" stroke-width="2"></rect>
+          <g stroke="#2B1F3C" stroke-width="1">
+            <path d="M56 12V308M108 12V308M160 12V308M212 12V308M264 12V308"></path>
+            <path d="M12 56H308M12 108H308M12 160H308M12 212H308M12 264H308"></path>
+          </g>
+          <!-- long goals, left and right -->
+          <rect x="22" y="96" width="16" height="128" rx="6" fill="#5A189A" stroke="#C77DFF" stroke-width="1.5"></rect>
+          <rect x="282" y="96" width="16" height="128" rx="6" fill="#5A189A" stroke="#C77DFF" stroke-width="1.5"></rect>
+          <!-- centre goal stack -->
+          <rect x="132" y="132" width="56" height="56" rx="8" fill="#241832" stroke="#9D4EDD" stroke-width="1.5"></rect>
+          <circle cx="160" cy="160" r="15" fill="none" stroke="#C77DFF" stroke-width="1.5"></circle>
+          <!-- blocks -->
+          <g>
+            <rect x="74" y="74" width="9" height="9" rx="2" fill="#E05263"></rect>
+            <rect x="96" y="128" width="9" height="9" rx="2" fill="#4C7DF0"></rect>
+            <rect x="120" y="86" width="9" height="9" rx="2" fill="#4C7DF0"></rect>
+            <rect x="204" y="102" width="9" height="9" rx="2" fill="#E05263"></rect>
+            <rect x="228" y="152" width="9" height="9" rx="2" fill="#E05263"></rect>
+            <rect x="196" y="216" width="9" height="9" rx="2" fill="#4C7DF0"></rect>
+            <rect x="112" y="222" width="9" height="9" rx="2" fill="#E05263"></rect>
+            <rect x="88" y="188" width="9" height="9" rx="2" fill="#4C7DF0"></rect>
+            <rect x="244" y="232" width="9" height="9" rx="2" fill="#4C7DF0"></rect>
+            <rect x="64" y="248" width="9" height="9" rx="2" fill="#E05263"></rect>
+          </g>
+          <!-- park zone -->
+          <rect x="120" y="272" width="80" height="26" rx="6" fill="none" stroke="#F2C14E" stroke-width="1.5" stroke-dasharray="4 4"></rect>
+          <text x="160" y="289" fill="#F2C14E" font-family="IBM Plex Mono, monospace" font-size="9" text-anchor="middle">PARK</text>
+          <!-- autonomous path -->
+          <path class="dash" d="M78 262 C 78 200, 120 190, 150 176 S 214 150, 236 112" fill="none" stroke="#C77DFF" stroke-width="2" stroke-linecap="round"></path>
+          <!-- robot -->
+          <rect x="66" y="250" width="24" height="24" rx="4" fill="#9D4EDD" stroke="#E0C3FC" stroke-width="1.5"></rect>
+        </svg>
+        <div class="field-cap">
+          <span>2025–26 game · Push Back</span>
+          <span>12 ft × 12 ft · 88 blocks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Who we are</p>
+        <h2>An engineering design team that ships hardware every single year.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-body">
+          <p>QVEX has represented Queen's in the <strong>VEX U</strong> division since 2019. VEX U is the university tier of VEX Robotics: two robots per team, a fresh game each September, and a deadline that does not move — the <strong>VEX Robotics World Championship</strong> in April.</p>
+          <p>That constraint is the whole point. In one academic year a member can take a mechanism from a sketch, through CAD, through the machine shop and 3D printers, onto a real field in front of real judges — and then find out in about fifteen seconds whether the design survives contact with an opponent.</p>
+          <p>We pull from <strong>Smith Engineering, Computing, and the Smith School of Business</strong>, and we're recognized by both the <strong>Engineering Society</strong> and the <strong>AMS</strong>. Mechanical, electrical, software, and the business side of the operation all sit in the same room, which is the closest thing to a real product team most of us will see before our first internship.</p>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>Division</dt><dd>VEX U (VURC)</dd></div>
+          <div class="fact"><dt>Competing since</dt><dd>2019</dd></div>
+          <div class="fact"><dt>Robots per year</dt><dd>Two</dd></div>
+          <div class="fact"><dt>Home</dt><dd>Kingston, Ontario</dd></div>
+          <div class="fact"><dt>Affiliations</dt><dd>EngSoc · AMS</dd></div>
+          <div class="fact"><dt>Open to</dt><dd>All faculties, all years</dd></div>
+          <div class="fact"><dt>Experience required</dt><dd>None</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- SUBTEAMS -->
+  <section id="subteams">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Sub-teams</p>
+        <h2>Four ways in. Pick the one you want to get good at.</h2>
+        <p>Members join one sub-team and are free to cross over. You do not need to arrive knowing any of this — most people learn it on the team.</p>
+      </div>
+      <div class="teams">
+        <article class="team">
+          <p class="tag">Mechanical</p>
+          <h3>Design &amp; Manufacturing</h3>
+          <p>Drivetrains, intakes, scoring mechanisms and everything that has to survive being shoved by another robot.</p>
+          <ul>
+            <li>CAD and design reviews</li>
+            <li>Machining, lathe and mill work</li>
+            <li>3D printing and rapid iteration</li>
+          </ul>
+        </article>
+        <article class="team">
+          <p class="tag">Electrical</p>
+          <h3>Power &amp; Sensing</h3>
+          <p>Wiring harnesses, motor and battery budgets, and the sensors the autonomous routines depend on.</p>
+          <ul>
+            <li>Harness layout and strain relief</li>
+            <li>Sensor selection and mounting</li>
+            <li>Debugging faults at competition</li>
+          </ul>
+        </article>
+        <article class="team">
+          <p class="tag">Software</p>
+          <h3>Autonomy &amp; Controls</h3>
+          <p>Driver controls, odometry, motion profiling, and the autonomous routines that score before a human touches a stick.</p>
+          <ul>
+            <li>C++ on the VEX V5 brain</li>
+            <li>Odometry and path following</li>
+            <li>PID and motion tuning</li>
+          </ul>
+        </article>
+        <article class="team">
+          <p class="tag">Operations</p>
+          <h3>Business &amp; Media</h3>
+          <p>The team runs on funding, logistics and a reputation. This is where that gets built.</p>
+          <ul>
+            <li>Sponsorship and finance</li>
+            <li>Graphic design and social</li>
+            <li>Travel and competition logistics</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- SEASON -->
+  <section id="season">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">2025–26 season</p>
+        <h2>Push Back.</h2>
+        <p>Every VEX season is a new game revealed in the spring, and every team on earth starts from the same rulebook on the same day.</p>
+      </div>
+      <div class="season">
+        <div class="panel">
+          <h3>The game</h3>
+          <p>Two alliances compete on a 12 × 12 ft field to score 88 blocks into long goals and centre goals, hold territory in the control zones, and park before the buzzer. Matches open with an autonomous period — no drivers, no excuses — before handing over to human control.</p>
+          <ul class="rules">
+            <li><span>FIELD</span> 12 ft × 12 ft, 6 × 6 foam tiles</li>
+            <li><span>SCORING</span> 88 blocks · long goals · centre goals</li>
+            <li><span>ZONES</span> Control zones and an endgame park</li>
+            <li><span>VEX U</span> Two robots per team, per match</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Our robots</h3>
+          <p>This season's build is <strong>QUEEN</strong> — revealed on our YouTube channel ahead of the World Championship. Watch it drive before you decide whether you want to help build the next one.</p>
+          <p style="margin-top:14px"><a class="btn ghost sm" href="https://www.youtube.com/@queensvex" target="_blank" rel="noopener">Watch the 2026 reveal</a></p>
+          <p class="tbd tbd-block">Add: robot specs, drivetrain, scoring mechanism, and a photo or two here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- RESULTS -->
+  <section id="results">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Results</p>
+        <h2>What the record looks like.</h2>
+        <p>Listed newest first. Skills scores are solo runs against the clock; judged awards are decided on design process and documentation, not just wins.</p>
+      </div>
+      <ol class="timeline">
+        <li class="tl">
+          <p class="year">2025–26 · Push Back</p>
+          <h3>Season in progress</h3>
+          <p>QUEEN revealed and competing.</p>
+          <p class="tbd tbd-block">Add this season's events, placements and Worlds result.</p>
+        </li>
+        <li class="tl award">
+          <p class="year">Recent season</p>
+          <h3>Queen's Robotics Cup — <span class="medal">Design Award</span></h3>
+          <p>We launched the Queen's Robotics Cup, the first annual VEX competition hosted at Queen's, and took the Design Award at the inaugural event.</p>
+        </li>
+        <li class="tl">
+          <p class="year">Recent season</p>
+          <h3>West Virginia — 2nd in Skills</h3>
+          <p>Second-place skills finish and a qualification for the World Championship.</p>
+        </li>
+        <li class="tl award">
+          <p class="year">2022–23</p>
+          <h3>Canadian Nationals — <span class="medal">Excellence Award</span>, 1st in Skills</h3>
+          <p>The Excellence Award is the top overall honour at a VEX event: robot performance, design process and team conduct together.</p>
+        </li>
+        <li class="tl award">
+          <p class="year">2022–23</p>
+          <h3>Kalahari Classic — <span class="medal">Judges Award</span>, 2nd in Skills</h3>
+          <p>A judged award for the team's design process and documentation.</p>
+        </li>
+        <li class="tl">
+          <p class="year">2022–23</p>
+          <h3>World Championship — Top 16 globally</h3>
+          <p>Ranked inside the top 16 VEX U teams in the world.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- JOIN -->
+  <section id="join">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Join</p>
+        <h2>No experience necessary. All applicants are accepted.</h2>
+        <p>That is the actual policy, not a recruiting slogan. Applications run on a rolling basis all year, so there is no single deadline to miss.</p>
+      </div>
+      <div class="join-grid">
+        <div>
+          <div class="open-roles">
+            <div class="role">
+              <div>
+                <strong>General Member</strong>
+                <small>Any faculty, any year · rolling applications</small>
+              </div>
+              <a class="btn sm" href="https://breezy.engsoc.queensu.ca/p/e928d89c4ac6-queen-s-vex-u-robotics-team-qvex-general-member" target="_blank" rel="noopener">Apply</a>
+            </div>
+            <div class="role">
+              <div>
+                <strong>Software Project Lead</strong>
+                <small>Leadership role · applications via Linktree</small>
+              </div>
+              <a class="btn sm ghost" href="https://linktr.ee/qvex" target="_blank" rel="noopener">Apply</a>
+            </div>
+            <div class="role">
+              <div>
+                <strong>Just want to look around first?</strong>
+                <small>300+ members · ask anything before you apply</small>
+              </div>
+              <a class="btn sm ghost" href="https://linktr.ee/qvex" target="_blank" rel="noopener">Discord</a>
+            </div>
+          </div>
+          <p class="tbd tbd-block">Add: meeting times, bay/lab location, and any director roles currently open.</p>
+        </div>
+        <div>
+          <blockquote class="quote">
+            “Members design and build competition robots, program autonomous systems, and compete at regional and world championship events.”
+            <cite>QVEX general member posting, EngSoc</cite>
+          </blockquote>
+          <p class="muted" style="margin-top:22px;font-size:15px">If you have never touched CAD or written a line of C++, you are the person this team is built to train. If you have, there is a robot that needs to score faster than it currently does.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- SPONSORS -->
+  <section id="sponsors">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Sponsors</p>
+        <h2>The people who make the season possible.</h2>
+      </div>
+      <div class="sponsors">
+        <div class="sponsor"><strong>Smith Engineering</strong><small>Queen's engineering faculty — our home and our biggest backer.</small></div>
+        <div class="sponsor"><strong>Mercedes-Benz Thornhill</strong><small>Dealership partner supporting the team's build and travel.</small></div>
+        <div class="sponsor"><strong>DigiKey</strong><small>Electronic components for the electrical sub-team.</small></div>
+        <div class="sponsor"><strong>I Design Solutions</strong><small>Design and manufacturing support.</small></div>
+      </div>
+      <div class="sponsor-note">
+        <p><strong>Want your logo on the robot?</strong> Sponsors get branding on team materials and reach an audience of over 30,000 students and educators at the world's largest robotics competition — plus a direct line to a room full of graduating engineers.</p>
+        <a class="btn" href="mailto:qvex@engsoc.queensu.ca?subject=QVEX%20sponsorship">Talk to us</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Contact</p>
+        <h2>Find us.</h2>
+      </div>
+      <div class="contact">
+        <a class="chan" href="mailto:qvex@engsoc.queensu.ca"><span class="tag">Email</span><strong>qvex@engsoc.queensu.ca</strong></a>
+        <a class="chan" href="https://www.instagram.com/queensvex/" target="_blank" rel="noopener"><span class="tag">Instagram</span><strong>@queensvex</strong></a>
+        <a class="chan" href="https://www.youtube.com/@queensvex" target="_blank" rel="noopener"><span class="tag">YouTube</span><strong>Robot reveals</strong></a>
+        <a class="chan" href="https://linktr.ee/qvex" target="_blank" rel="noopener"><span class="tag">Discord</span><strong>Join the server</strong></a>
+        <a class="chan" href="https://ca.linkedin.com/company/qvex" target="_blank" rel="noopener"><span class="tag">LinkedIn</span><strong>Queen's VEX U</strong></a>
+        <a class="chan" href="https://www.facebook.com/queens.vexu/" target="_blank" rel="noopener"><span class="tag">Facebook</span><strong>queens.vexu</strong></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>QVEX · Queen's VEX U Robotics Team · Kingston, Ontario</span>
+    <span class="foot-links">
+      <a href="https://linktr.ee/qvex" target="_blank" rel="noopener">All links</a>
+      <a href="mailto:qvex@engsoc.queensu.ca">Email</a>
+      <a href="#top">Back to top</a>
+    </span>
+  </div>
+</footer>
+</body>
+</html>
